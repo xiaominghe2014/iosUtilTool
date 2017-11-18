@@ -68,9 +68,7 @@ static DeviceUtils* deviceUtil = nil;
                                                @"iPhone10,4":@"iPhone 8",
                                                @"iPhone10,5":@"iPhone 8 Plus",
                                                @"iPhone10,6":@"iPhone X"};
-    
-    struct utsname systemInfo;
-    uname(&systemInfo);
+
     NSString *platform = [self getDeviceIdentifier];
     if ([[map allKeys] containsObject:platform]) {
         return [map objectForKey:platform];
