@@ -6,7 +6,30 @@
 #import <sys/utsname.h>
 #import "DeviceUtils.h"
 
+@interface DeviceUtils(){}
+    - (NSArray*) getDeviceSubViews;
+@end
+
 @implementation DeviceUtils : NSObject 
+
+- (NSArray*) getDeviceSubViews
+{
+    BOOL iphoneX = [[self getDeviceGeneration] isEqualToString:@"iPhone X"];
+    UIApplication* app = [UIApplication sharedApplication];
+    NSArray* children = NULL;
+    if(YES == iphoneX){
+        children = [[[[[app valueForKeyPath:@"statusBar"]
+                            valueForKeyPath:@"statusBar"]
+                            valueForKeyPath:@"foregroundView"]
+                            subviews][2] subviews];
+    }else{
+        children = [[[app valueForKeyPath:@"statusBar"]
+                          valueForKeyPath:@"foregroundView"]
+                          subviews];
+    }
+    return children;
+}
+
 
 static DeviceUtils* deviceUtil = nil;
 
@@ -68,7 +91,7 @@ static DeviceUtils* deviceUtil = nil;
                                                @"iPhone10,4":@"iPhone 8",
                                                @"iPhone10,5":@"iPhone 8 Plus",
                                                @"iPhone10,6":@"iPhone X"};
-
+    
     NSString *platform = [self getDeviceIdentifier];
     if ([[map allKeys] containsObject:platform]) {
         return [map objectForKey:platform];
@@ -94,9 +117,22 @@ static DeviceUtils* deviceUtil = nil;
 
 - (NSString*) getNetWorkType
 {
-    UIApplication* app = [UIApplication sharedApplication];
-    NSArray* children = [[[app valueForKeyPath:@"statusBar"] valueForKeyPath:@"foregroundView"] subviews];
+    BOOL iphoneX = [[self getDeviceGeneration] isEqualToString:@"iPhone X"];
+    NSArray* children = [self getDeviceSubViews];
     NSString* type = @"";
+    if(YES == iphoneX){
+        for (id child in children) {
+            if ([child isKindOfClass:NSClassFromString(@"_UIStatusBarWifiSignalView")]) {
+                type = @"wifi";
+            }else if ([child isKindOfClass:NSClassFromString(@"_UIStatusBarStringView")]) {
+                type = [child valueForKeyPath:@"originalText"];
+            }
+        }
+        if([type isEqualToString:@""]){
+            type = @"nil";
+        }
+        return type;
+    }
     int nType = 0;
     for (id child in children) {
         if([child isKindOfClass:NSClassFromString(@"UIStatusBarDataNetworkItemView")])
@@ -128,10 +164,18 @@ static DeviceUtils* deviceUtil = nil;
 
 - (int) getWifiStrength
 {
-    UIApplication* app = [UIApplication sharedApplication];
-    NSArray* children = [[[app valueForKeyPath:@"statusBar"] valueForKeyPath:@"foregroundView"] subviews];
+    BOOL iphoneX = [[self getDeviceGeneration] isEqualToString:@"iPhone X"];
+    NSArray* children = [self getDeviceSubViews];
     NSString* type = @"";
     int nType = 0;
+    if(YES == iphoneX){
+        for(id child in children){
+            if([child isKindOfClass:NSClassFromString(@"_UIStatusBarWifiSignalView")]){
+                nType = [[child valueForKey:@"_numberOfActiveBars"] intValue];
+            }
+        }
+        return nType;
+    }
     for (id child in children) {
         if([child isKindOfClass:NSClassFromString(@"UIStatusBarDataNetworkItemView")])
         {
@@ -143,16 +187,23 @@ static DeviceUtils* deviceUtil = nil;
     {
          nType = [[type valueForKey:@"_wifiStrengthBars"] intValue];
     }
-   
     return nType;
 }
 
 - (int) getSignalStrength
 {
-    UIApplication* app = [UIApplication sharedApplication];
-    NSArray* children = [[[app valueForKeyPath:@"statusBar"] valueForKeyPath:@"foregroundView"] subviews];
+    NSArray* children = [self getDeviceSubViews];
     NSString* type = @"";
     int nType = 0;
+    BOOL iphoneX = [[self getDeviceGeneration] isEqualToString:@"iPhone X"];
+    if(YES == iphoneX){
+        for(id child in children){
+            if([child isKindOfClass:NSClassFromString(@"_UIStatusBarSignalView")]){
+                nType = [[child valueForKey:@"_numberOfActiveBars"] intValue];
+            }
+        }
+        return nType;
+    }
     for (id child in children) {
         if([child isKindOfClass:NSClassFromString(@"UIStatusBarSignalStrengthItemView")])
         {
@@ -164,7 +215,6 @@ static DeviceUtils* deviceUtil = nil;
     {
         nType = [[type valueForKey:@"_signalStrengthBars"] intValue];
     }
-    
     return nType;
 }
 
