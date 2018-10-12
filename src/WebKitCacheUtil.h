@@ -13,7 +13,7 @@
 #import <WebKit/WebKit.h>
 @interface WebKitCacheUtil:NSObject
 
-+ (WebKitCacheUtil*) instance;
++ (instancetype) instance;
 
 /**
  默认缓存目录

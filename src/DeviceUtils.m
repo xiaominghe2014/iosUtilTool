@@ -31,14 +31,15 @@
 }
 
 
-static DeviceUtils* deviceUtil = nil;
 
-+ (DeviceUtils*) instance
++ (instancetype) instance
 {
-    if (nil == deviceUtil) {
+    static DeviceUtils* deviceUtil = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken,^{
         deviceUtil = [[DeviceUtils alloc] init];
-        [[UIDevice currentDevice] setBatteryMonitoringEnabled:YES];
-    }
+    });
+    [[UIDevice currentDevice] setBatteryMonitoringEnabled:YES];
     return deviceUtil;
 }
 
@@ -62,7 +63,7 @@ static DeviceUtils* deviceUtil = nil;
 
 - (NSString*) getDeviceGeneration
 {
-    //下面型号由 ios_type_spider.py 从https://www.theiphonewiki.com/wiki/List_of_iPhones 抓取
+    //下面型号由 ios_type_spider.py 从https://www.theiphonewiki.com/wiki/Models 抓取
     NSDictionary<NSString*,NSString*> *map = @{
 												@"iPhone1,1":@"iPhone",
 												@"iPhone1,2":@"iPhone 3G",

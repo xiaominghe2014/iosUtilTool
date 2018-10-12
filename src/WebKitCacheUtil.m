@@ -19,14 +19,15 @@
 
 @implementation WebKitCacheUtil : NSObject
 
-static WebKitCacheUtil* cacheUtil = nil;
 
-+ (WebKitCacheUtil*) instance
++ (instancetype) instance
 {
-    if (nil == cacheUtil) {
-        cacheUtil = [[WebKitCacheUtil alloc] init];
-        [cacheUtil setCachePath:[cacheUtil defaultCachePath]];
-    }
+    static WebKitCacheUtil* cacheUtil = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken,^{
+       cacheUtil = [[WebKitCacheUtil alloc] init];
+    });
+    [cacheUtil setCachePath:[cacheUtil defaultCachePath]];
     return cacheUtil;
 }
 

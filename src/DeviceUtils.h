@@ -8,7 +8,7 @@
 #import <UIKit/UIKit.h>
 @interface DeviceUtils:NSObject
 
-+ (DeviceUtils*) instance;
++ (instancetype) instance;
 
 /**
  获取系统名称

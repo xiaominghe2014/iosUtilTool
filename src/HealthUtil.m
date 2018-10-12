@@ -7,14 +7,16 @@
 @end
 @implementation HealthUtil : NSObject
 
-static HealthUtil* util = nil;
 
-+ (HealthUtil*) instance
+
++ (instancetype) instance
 {
-    if (nil == util) {
+    static HealthUtil* util = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken,^{
         util = [[HealthUtil alloc] init];
-        util.healthStore = [[HKHealthStore alloc]init];
-    }
+    });
+    util.healthStore = [[HKHealthStore alloc]init];
     return util;
 }
 
@@ -122,7 +124,8 @@ static HealthUtil* util = nil;
         source = [[result valueForKey:@"sourceRevision"] valueForKey:@"source"];
     } else {
         //@TODO Update deprecated API call
-        source = result.source;
+        //source = result.source;
+        source = result.sourceRevision;
     }
     //    Ivar localIvar = class_getInstanceVariable([source class], "_localDevice");
     //    bool local = object_getIvar(source, localIvar);

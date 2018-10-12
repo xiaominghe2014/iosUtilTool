@@ -16,7 +16,7 @@ typedef void(^ReadStepsCallBack)(double);
 
 @interface HealthUtil:NSObject
 
-+ (HealthUtil*) instance;
++ (instancetype) instance;
 
 /**
  健康授权
