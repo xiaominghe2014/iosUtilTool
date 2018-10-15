@@ -5,7 +5,7 @@
 //
 #import <sys/utsname.h>
 #import "DeviceUtils.h"
-
+#import "ios_device_des.h"
 @interface DeviceUtils(){}
     - (NSArray*) getDeviceSubViews;
 @end
@@ -87,13 +87,25 @@
 												@"iPhone11,2":@"iPhone XS",
 												@"iPhone11,4, iPhone11,6":@"iPhone XS Max",
 												};
-    
     NSString *platform = [self getDeviceIdentifier];
     if ([[map allKeys] containsObject:platform]) {
         NSArray* list =  [map allKeys];
         for(NSString* key in list){
             if([key containsString:platform]){
                 return [map objectForKey:key];
+            }
+        }
+    }
+    NSData* data = [IOS_DES dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *err;
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data
+                                                        options:NSJSONReadingMutableContainers
+                                                          error:&err];
+    if ([[dic allKeys] containsObject:platform]) {
+        NSArray* list =  [dic allKeys];
+        for(NSString* key in list){
+            if([key containsString:platform]){
+                return [dic objectForKey:key];
             }
         }
     }
