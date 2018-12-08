@@ -4,11 +4,11 @@
 """
 @version: ??
 @author: ximena
-@license: MIT Licence 
+@license: MIT Licence
 @contact: xiaominghe2014@gmail.com
 @file: ios_type_spider
 @time: 2018/10/9
-
+    
 """
 import os
 import re
@@ -23,10 +23,10 @@ current_dir = os.path.dirname(os.path.realpath(__file__))
 
 
 class IOSTypeSpider(object):
-
+    
     def __init__(self):
         super().__init__()
-
+    
     @staticmethod
     def get(url):
         browser = webdriver.Chrome()
@@ -34,7 +34,7 @@ class IOSTypeSpider(object):
         text = browser.page_source
         browser.close()
         return text
-
+    
     @staticmethod
     def parse_response(resp):
         ios_map = {}
@@ -57,10 +57,10 @@ class IOSTypeSpider(object):
                         for t in td:
                             if 0 == index and len(t.findall('a')):
                                 if '' == generation:
-                                        des = t.findall('a')[0].text
-                                        if IOSTypeSpider.is_ios_des(des):
-                                            generation = des
-                                            des_type = generation
+                                    des = t.findall('a')[0].text
+                                    if IOSTypeSpider.is_ios_des(des):
+                                        generation = des
+                                        des_type = generation
                             if t.text:
                                 if 0 == index and '' == generation:
                                     des = t.text
@@ -76,7 +76,11 @@ class IOSTypeSpider(object):
                             index += 1
         except Exception as e:
             print(e)
-        IOSTypeSpider.write_string(str(json.dumps(ios_map)))
+        IOSTypeSpider.write_string(str(json.dumps(ios_map,
+                                                  ensure_ascii=False,
+                                                  sort_keys=False,
+                                                  indent=4,
+                                                  separators=(',', ':'))))
         return ios_map
 
     @staticmethod
@@ -101,14 +105,14 @@ class IOSTypeSpider(object):
             tmp = '@"{}":@"{}",{}'.format(k, v, per_code)
             new_code = '{}{}'.format(new_code, tmp)
         return new_code
-
+    
     @staticmethod
     def spider(url):
         resp = IOSTypeSpider.get(url)
         IOSTypeSpider.parse_response(resp)
         # new_code = IOSTypeSpider.generator_new_code(iphone_map)
         # IOSTypeSpider.replace_old_code(new_code)
-
+    
     @staticmethod
     def write_string(text):
         with open('{}/{}'.format(current_dir, 'ios_device.json'), 'w+', encoding='utf-8') as f:
@@ -118,6 +122,7 @@ class IOSTypeSpider(object):
             '\n')
         ios_device_des_h = 'ios_device_des.h'
         code = text.replace('"', '\\"')
+        code = code.replace('\n    ', '\\\n\t').replace('\n}', '\\\n}')
         code = '#import <Foundation/Foundation.h> \n' \
                'const NSString* IOS_DES = @"{}";'.format(code)
         des = '{}//  Copyright © ximena. All rights reserved.\n\n\n' \

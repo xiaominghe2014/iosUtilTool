@@ -29,7 +29,7 @@
 
 
 /**
-  获取设备类型 此处只枚举了iphone目前所有型号
+  获取设备类型 此处枚举了ios系统设备目前所有型号
   目前已经利用ios_type_spider_all爬取了ios所有设备型号
   详情请看 ios_device_des.h
  @des ios设备内部型号---你可以从https://www.theiphonewiki.com/wiki/Models获取最新型号
@@ -67,6 +67,12 @@
  */
 - (int) getSignalStrength;
 
+/**
+ 原生系统分享
+ @notice 相册注意加权限
+ */
++ (void) systemShareWithController:(UIViewController*)controller title:(NSString*)title
+                               url:(NSString*)url image:(NSString*)path;
 @end
 
 

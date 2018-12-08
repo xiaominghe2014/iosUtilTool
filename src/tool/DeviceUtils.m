@@ -58,44 +58,13 @@
 {
     struct utsname systemInfo;
     uname(&systemInfo);
-    return [NSString stringWithCString:systemInfo.machine encoding:NSASCIIStringEncoding];;
+    return [NSString stringWithCString:systemInfo.machine
+                              encoding:NSASCIIStringEncoding];
 }
 
 - (NSString*) getDeviceGeneration
 {
-    //下面型号由 ios_type_spider.py 从https://www.theiphonewiki.com/wiki/Models 抓取
-    NSDictionary<NSString*,NSString*> *map = @{
-												@"iPhone1,1":@"iPhone",
-												@"iPhone1,2":@"iPhone 3G",
-												@"iPhone2,1":@"iPhone 3GS",
-												@"iPhone3,1, iPhone3,2, iPhone3,3":@"iPhone 4",
-												@"iPhone4,1":@"iPhone 4S",
-												@"iPhone5,1, iPhone5,2":@"iPhone 5",
-												@"iPhone5,3, iPhone5,4":@"iPhone 5c",
-												@"iPhone6,1, iPhone6,2":@"iPhone 5s",
-												@"iPhone7,2":@"iPhone 6",
-												@"iPhone7,1":@"iPhone 6 Plus",
-												@"iPhone8,1":@"iPhone 6s",
-												@"iPhone8,2":@"iPhone 6s Plus",
-												@"iPhone8,4":@"iPhone SE",
-												@"iPhone9,1, iPhone9,3":@"iPhone 7",
-												@"iPhone9,2, iPhone9,4":@"iPhone 7 Plus",
-												@"iPhone10,1, iPhone10,4":@"iPhone 8",
-												@"iPhone10,2, iPhone10,5":@"iPhone 8 Plus",
-												@"iPhone10,3, iPhone10,6":@"iPhone X",
-												@"iPhone11,8":@"iPhone XR",
-												@"iPhone11,2":@"iPhone XS",
-												@"iPhone11,4, iPhone11,6":@"iPhone XS Max",
-												};
     NSString *platform = [self getDeviceIdentifier];
-    if ([[map allKeys] containsObject:platform]) {
-        NSArray* list =  [map allKeys];
-        for(NSString* key in list){
-            if([key containsString:platform]){
-                return [map objectForKey:key];
-            }
-        }
-    }
     NSData* data = [IOS_DES dataUsingEncoding:NSUTF8StringEncoding];
     NSError *err;
     NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data
@@ -231,5 +200,12 @@
     return nType;
 }
 
-
++ (void)systemShareWithController:(UIViewController *)controller title:(NSString *)title url:(NSString *)url image:(NSString *)path{
+    NSString* shareTitle = title;
+    UIImage *shareImage = [UIImage imageWithContentsOfFile:path];
+    NSURL *shareUrl = [NSURL URLWithString:url];
+    NSArray *shareItems = @[shareTitle,shareImage,shareUrl];
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:shareItems applicationActivities:nil];
+    [controller presentViewController:activityVC animated:YES completion:nil];
+}
 @end

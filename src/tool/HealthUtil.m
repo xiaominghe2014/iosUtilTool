@@ -110,7 +110,9 @@
                              [self climbedType],
                              nil];
     //从健康应用中获取权限
-    [self.healthStore requestAuthorizationToShareTypes:writePermisson readTypes:readPermisson completion:^(BOOL success, NSError * _Nullable error) {
+    [self.healthStore requestAuthorizationToShareTypes:writePermisson
+                                             readTypes:readPermisson
+                                            completion:^(BOOL success, NSError * _Nullable error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             cb(success,error);
         });
@@ -138,7 +140,8 @@
     NSDate *now = [NSDate date];
     NSCalendar *calender = [NSCalendar currentCalendar];
     NSUInteger unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
-    NSDateComponents *dateComponent = [calender components:unitFlags fromDate:now];
+    NSDateComponents *dateComponent = [calender components:unitFlags
+                                                  fromDate:now];
     int hour = (int)[dateComponent hour];
     int minute = (int)[dateComponent minute];
     int second = (int)[dateComponent second];
@@ -156,7 +159,11 @@
 -(void) queryData:(HKQuantityType*) type withCondition:(NSPredicate*) condition andLimit:(NSUInteger)limit onCompleted:(void(^)(NSArray<__kindof HKSample *> *)) cb{
     NSSortDescriptor *start = [NSSortDescriptor sortDescriptorWithKey:HKSampleSortIdentifierStartDate ascending:NO];
     NSSortDescriptor *end = [NSSortDescriptor sortDescriptorWithKey:HKSampleSortIdentifierEndDate ascending:NO];
-    HKSampleQuery *sampleQuery = [[HKSampleQuery alloc]initWithSampleType:type predicate:condition limit:limit sortDescriptors:@[start,end] resultsHandler:^(HKSampleQuery * _Nonnull query, NSArray<__kindof HKSample *> * _Nullable results, NSError * _Nullable error) {
+    HKSampleQuery *sampleQuery = [[HKSampleQuery alloc]initWithSampleType:type
+                                                                predicate:condition
+                                                                    limit:limit
+                                                          sortDescriptors:@[start,end]
+                                                           resultsHandler:^(HKSampleQuery * _Nonnull query, NSArray<__kindof HKSample *> * _Nullable results, NSError * _Nullable error) {
         cb(results);
     }];
     //执行查询
@@ -190,7 +197,11 @@
 }
 
 //保存步数
--(void) saveStepsCount:(double)steps startDate:(NSDate*) start endDate:(NSDate*)end device:(HKDevice*) device callBack:(WriteCallBack) cb
+-(void) saveStepsCount:(double)steps
+             startDate:(NSDate*) start
+               endDate:(NSDate*)end
+                device:(HKDevice*) device
+              callBack:(WriteCallBack) cb
 {
     HKQuantity *stepQuantityConsumed = [HKQuantity quantityWithUnit:[HKUnit countUnit] doubleValue:steps];
     HKQuantityType *stepConsumedType = [self stepType];
