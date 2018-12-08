@@ -49,14 +49,17 @@ bool test = true;
         for(NSString* file in list){
             if([[file pathExtension] isEqualToString:@"png"]){
                 NSLog(@"%@",file);
-                //from = [NSString stringWithFormat:@"%@/%@",path,file];;
+                //from = [NSString stringWithFormat:@"%@/%@",path,file];
                 break;
             }
         }
     }
     if(NO == [[NSFileManager defaultManager] fileExistsAtPath:from]){
         _imgBg = [[UIImageView alloc] init];
-        _imgBg.backgroundColor = [UIColor colorWithRed:44.0f/255.0f green:24.0f/255.0f blue:24.0f/255.0f alpha:1.0f];
+        _imgBg.backgroundColor = [UIColor colorWithRed:24.0f/255.0f
+                                                 green:24.0f/255.0f
+                                                  blue:24.0f/255.0f
+                                                 alpha:1.0f];
     }else{
         UIImage *image = [UIImage imageWithContentsOfFile:from];
         _imgBg = [[UIImageView alloc] initWithImage:image];
@@ -66,20 +69,32 @@ bool test = true;
 }
 
 -(void)initPercent{
-    UIColor* textColor = [UIColor colorWithRed:204.0f/255.0f green:41.0f/255.0f blue:44.0f/255.0f alpha:1.0f];
+    UIColor* textColor = [UIColor colorWithRed:204.0f/255.0f
+                                         green:41.0f/255.0f
+                                          blue:44.0f/255.0f
+                                         alpha:1.0f];
     UIFont* font = [UIFont fontWithName:@"Arial" size:60];
     CGRect frame = CGRectMake(20, CGRectGetMaxY([[UIScreen mainScreen] bounds])/2 - 75, [[UIScreen mainScreen] bounds].size.width, 60);
-    _txtPercent = [self createLableWithFont:font frame:frame color:textColor];
+    _txtPercent = [self createLableWithFont:font
+                                      frame:frame
+                                      color:textColor];
 }
 
 -(void)initDes{
-    UIColor* textColor = [UIColor colorWithRed:134.0f/255.0f green:134.0f/255.0f blue:134.0f/255.0f alpha:1.0f];
+    UIColor* textColor = [UIColor colorWithRed:134.0f/255.0f
+                                         green:134.0f/255.0f
+                                          blue:134.0f/255.0f
+                                         alpha:1.0f];
     UIFont* font = [UIFont fontWithName:@"Arial" size:20];
     CGRect frame = CGRectMake(20, CGRectGetMaxY([[UIScreen mainScreen] bounds])/2 + 25, [[UIScreen mainScreen] bounds].size.width, 20);
-    _txtDes = [self createLableWithFont:font frame:frame color:textColor];
+    _txtDes = [self createLableWithFont:font
+                                  frame:frame
+                                  color:textColor];
 }
 
--(UILabel*) createLableWithFont:(UIFont*)font frame:(CGRect)frame color:(UIColor*)color{
+-(UILabel*) createLableWithFont:(UIFont*)font
+                          frame:(CGRect)frame
+                          color:(UIColor*)color{
     UILabel* label =  [[UILabel alloc] init];
     label.font = font;
     label.textColor = color;
@@ -92,15 +107,26 @@ bool test = true;
 -(void)initProgress{
     _progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
     _progressView.progressTintColor = [UIColor redColor];
-    _progressView.backgroundColor = [UIColor colorWithRed:134.0f/255.0f green:134.0f/255.0f blue:134.0f/255.0f alpha:1.0f];
+    _progressView.backgroundColor = [UIColor colorWithRed:134.0f/255.0f
+                                                    green:134.0f/255.0f
+                                                     blue:134.0f/255.0f
+                                                    alpha:1.0f];
     _progressView.frame = CGRectMake(0, [[UIScreen mainScreen] bounds].size.height/2, [[UIScreen mainScreen] bounds].size.width, 16);
     [_progressView setProgress:0.0f animated:true];
     [self addSubview:_progressView];
 }
 -(void)start{
-    _m_timer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(checkProgress) userInfo:nil repeats:YES];
+    _m_timer = [NSTimer scheduledTimerWithTimeInterval:0.1f
+                                                target:self
+                                              selector:@selector(checkProgress)
+                                              userInfo:nil
+                                               repeats:YES];
     if(test){
-        [NSTimer scheduledTimerWithTimeInterval:(arc4random()%100)/100.0f target:self selector:@selector(randomUpdateSecond) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:(arc4random()%100)/100.0f
+                                         target:self
+                                       selector:@selector(randomUpdateSecond)
+                                       userInfo:nil
+                                        repeats:NO];
     }
 }
 -(void)checkProgress{
@@ -177,7 +203,11 @@ bool test = true;
 #pragma mark 测试部分
 -(void)randomUpdateSecond{
     float t = (arc4random()%100)/100.0f;
-    _m_testTimer = [NSTimer scheduledTimerWithTimeInterval:t target:self selector:@selector(randomTest) userInfo:nil repeats:YES];
+    _m_testTimer = [NSTimer scheduledTimerWithTimeInterval:t
+                                                    target:self
+                                                  selector:@selector(randomTest)
+                                                  userInfo:nil
+                                                   repeats:YES];
 }
 
 -(void)randomTest{
