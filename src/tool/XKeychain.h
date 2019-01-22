@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 +(NSString*) getValue:(NSString*)key fromService:(NSString*)service;
 +(void) saveValue:(NSString*)value ByKey:(NSString*)key toService:(NSString*)service;
 +(void) deleteService:(NSString*)service;
++(NSString*)generateUUID;
 @end
 
 NS_ASSUME_NONNULL_END
