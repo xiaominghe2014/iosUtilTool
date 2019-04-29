@@ -35,4 +35,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface UIView (extension)
+
+/**
+ @brief 把UIView变成一颗爱心❤️
+ */
+- (void)loveHeart;
+@end
+
 NS_ASSUME_NONNULL_END

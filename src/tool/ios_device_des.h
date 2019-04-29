@@ -1,4 +1,4 @@
-//generated spider in 2018-12-08 13:12:58
+//generated spider in 2019-04-29 14:36:40
 //  Copyright © ximena. All rights reserved.
 
 
@@ -6,7 +6,8 @@
 #define ios_device_des_h 
 #import <Foundation/Foundation.h> 
 const NSString* IOS_DES = @"{\
-	\"AirPods1,1\":\"AirPods\",\
+	\"AirPods1,1\":\"AirPods (1st generation)\",\
+	\"AirPods2,1\":\"AirPods (2nd generation)\",\
 	\"AppleTV2,1\":\"Apple TV (2nd generation)\",\
 	\"AppleTV3,1\":\"Apple TV (3rd generation)\",\
 	\"AppleTV3,2\":\"Apple TV (3rd generation)\",\
@@ -64,6 +65,8 @@ const NSString* IOS_DES = @"{\
 	\"iPad8,6\":\"iPad Pro (12.9-inch) (3rd generation)\",\
 	\"iPad8,7\":\"iPad Pro (12.9-inch) (3rd generation)\",\
 	\"iPad8,8\":\"iPad Pro (12.9-inch) (3rd generation)\",\
+	\"iPad11,3\":\"iPad Air (3rd generation)\",\
+	\"iPad11,4\":\"iPad Air (3rd generation)\",\
 	\"iPad2,5\":\"iPad mini\",\
 	\"iPad2,6\":\"iPad mini\",\
 	\"iPad2,7\":\"iPad mini\",\
@@ -75,6 +78,8 @@ const NSString* IOS_DES = @"{\
 	\"iPad4,9\":\"iPad mini 3\",\
 	\"iPad5,1\":\"iPad mini 4\",\
 	\"iPad5,2\":\"iPad mini 4\",\
+	\"iPad11,1\":\"iPad mini (5th generation)\",\
+	\"iPad11,2\":\"iPad mini (5th generation)\",\
 	\"iPhone1,1\":\"iPhone\",\
 	\"iPhone1,2\":\"iPhone 3G\",\
 	\"iPhone2,1\":\"iPhone 3GS\",\
