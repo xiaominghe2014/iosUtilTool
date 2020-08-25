@@ -1,4 +1,4 @@
-//generated spider in 2019-04-29 14:36:40
+//generated spider in 2020-08-09 17:07:30
 //  Copyright © ximena. All rights reserved.
 
 
@@ -8,6 +8,8 @@
 const NSString* IOS_DES = @"{\
 	\"AirPods1,1\":\"AirPods (1st generation)\",\
 	\"AirPods2,1\":\"AirPods (2nd generation)\",\
+	\"iProd8,1\":\"AirPods Pro\",\
+	\"AppleTV1,1\":\"Apple TV (1st generation)\",\
 	\"AppleTV2,1\":\"Apple TV (2nd generation)\",\
 	\"AppleTV3,1\":\"Apple TV (3rd generation)\",\
 	\"AppleTV3,2\":\"Apple TV (3rd generation)\",\
@@ -27,6 +29,10 @@ const NSString* IOS_DES = @"{\
 	\"Watch4,2\":\"Apple Watch Series 4\",\
 	\"Watch4,3\":\"Apple Watch Series 4\",\
 	\"Watch4,4\":\"Apple Watch Series 4\",\
+	\"Watch5,1\":\"Apple Watch Series 5\",\
+	\"Watch5,2\":\"Apple Watch Series 5\",\
+	\"Watch5,3\":\"Apple Watch Series 5\",\
+	\"Watch5,4\":\"Apple Watch Series 5\",\
 	\"AudioAccessory1,1\":\"HomePod\",\
 	\"AudioAccessory1,2\":\"HomePod\",\
 	\"iPad1,1\":\"iPad\",\
@@ -40,23 +46,27 @@ const NSString* IOS_DES = @"{\
 	\"iPad3,4\":\"iPad (4th generation)\",\
 	\"iPad3,5\":\"iPad (4th generation)\",\
 	\"iPad3,6\":\"iPad (4th generation)\",\
+	\"iPad6,11\":\"iPad (5th generation)\",\
+	\"iPad6,12\":\"iPad (5th generation)\",\
+	\"iPad7,5\":\"iPad (6th generation)\",\
+	\"iPad7,6\":\"iPad (6th generation)\",\
+	\"iPad7,11\":\"iPad (7th generation)\",\
+	\"iPad7,12\":\"iPad (7th generation)\",\
 	\"iPad4,1\":\"iPad Air\",\
 	\"iPad4,2\":\"iPad Air\",\
 	\"iPad4,3\":\"iPad Air\",\
 	\"iPad5,3\":\"iPad Air 2\",\
 	\"iPad5,4\":\"iPad Air 2\",\
+	\"iPad11,3\":\"iPad Air (3rd generation)\",\
+	\"iPad11,4\":\"iPad Air (3rd generation)\",\
 	\"iPad6,7\":\"iPad Pro (12.9-inch)\",\
 	\"iPad6,8\":\"iPad Pro (12.9-inch)\",\
 	\"iPad6,3\":\"iPad Pro (9.7-inch)\",\
 	\"iPad6,4\":\"iPad Pro (9.7-inch)\",\
-	\"iPad6,11\":\"iPad (5th generation)\",\
-	\"iPad6,12\":\"iPad (5th generation)\",\
 	\"iPad7,1\":\"iPad Pro (12.9-inch) (2nd generation)\",\
 	\"iPad7,2\":\"iPad Pro (12.9-inch) (2nd generation)\",\
 	\"iPad7,3\":\"iPad Pro (10.5-inch)\",\
 	\"iPad7,4\":\"iPad Pro (10.5-inch)\",\
-	\"iPad7,5\":\"iPad (6th generation)\",\
-	\"iPad7,6\":\"iPad (6th generation)\",\
 	\"iPad8,1\":\"iPad Pro (11-inch)\",\
 	\"iPad8,2\":\"iPad Pro (11-inch)\",\
 	\"iPad8,3\":\"iPad Pro (11-inch)\",\
@@ -65,8 +75,10 @@ const NSString* IOS_DES = @"{\
 	\"iPad8,6\":\"iPad Pro (12.9-inch) (3rd generation)\",\
 	\"iPad8,7\":\"iPad Pro (12.9-inch) (3rd generation)\",\
 	\"iPad8,8\":\"iPad Pro (12.9-inch) (3rd generation)\",\
-	\"iPad11,3\":\"iPad Air (3rd generation)\",\
-	\"iPad11,4\":\"iPad Air (3rd generation)\",\
+	\"iPad8,9\":\"iPad Pro (11-inch) (2nd generation)\",\
+	\"iPad8,10\":\"iPad Pro (11-inch) (2nd generation)\",\
+	\"iPad8,11\":\"iPad Pro (12.9-inch) (4th generation)\",\
+	\"iPad8,12\":\"iPad Pro (12.9-inch) (4th generation)\",\
 	\"iPad2,5\":\"iPad mini\",\
 	\"iPad2,6\":\"iPad mini\",\
 	\"iPad2,7\":\"iPad mini\",\
@@ -97,7 +109,7 @@ const NSString* IOS_DES = @"{\
 	\"iPhone7,1\":\"iPhone 6 Plus\",\
 	\"iPhone8,1\":\"iPhone 6s\",\
 	\"iPhone8,2\":\"iPhone 6s Plus\",\
-	\"iPhone8,4\":\"iPhone SE\",\
+	\"iPhone8,4\":\"iPhone SE (1st generation)\",\
 	\"iPhone9,1\":\"iPhone 7\",\
 	\"iPhone9,3\":\"iPhone 7\",\
 	\"iPhone9,2\":\"iPhone 7 Plus\",\
@@ -112,11 +124,16 @@ const NSString* IOS_DES = @"{\
 	\"iPhone11,2\":\"iPhone XS\",\
 	\"iPhone11,6\":\"iPhone XS Max\",\
 	\"iPhone11,4\":\"iPhone XS Max\",\
+	\"iPhone12,1\":\"iPhone 11\",\
+	\"iPhone12,3\":\"iPhone 11 Pro\",\
+	\"iPhone12,5\":\"iPhone 11 Pro Max\",\
+	\"iPhone12,8\":\"iPhone SE (2nd generation)\",\
 	\"iPod1,1\":\"iPod touch\",\
 	\"iPod2,1\":\"iPod touch (2nd generation)\",\
 	\"iPod3,1\":\"iPod touch (3rd generation)\",\
 	\"iPod4,1\":\"iPod touch (4th generation)\",\
 	\"iPod5,1\":\"iPod touch (5th generation)\",\
-	\"iPod7,1\":\"iPod touch (6th generation)\"\
+	\"iPod7,1\":\"iPod touch (6th generation)\",\
+	\"iPod9,1\":\"iPod touch (7th generation)\"\
 }";
 #endif /* ios_device_des_h */
