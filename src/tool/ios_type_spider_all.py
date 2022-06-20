@@ -86,13 +86,13 @@ class IOSTypeSpider(object):
     @staticmethod
     def replace_old_code(new_code):
         old_m = '{}/{}'.format(current_dir, "DeviceUtils.m")
-        with open(old_m, 'r+', encoding='utf-8') as m:
+        with open(old_m, 'r+') as m:
             old_code = m.read()
             pattern = r'@\{(.*)\};'
             old_iphone_map = re.findall(pattern, old_code, re.DOTALL)
             old = old_iphone_map[0]
             new_code = old_code.replace(old, new_code)
-        with open(old_m, 'w+', encoding='utf-8') as m:
+        with open(old_m, 'w+') as m:
             m.write(new_code)
 
     @staticmethod
@@ -115,7 +115,7 @@ class IOSTypeSpider(object):
     
     @staticmethod
     def write_string(text):
-        with open('{}/{}'.format(current_dir, 'ios_device.json'), 'w+', encoding='utf-8') as f:
+        with open('{}/{}'.format(current_dir, 'ios_device.json'), 'w+') as f:
             f.write(text)
         time_code = '//generated spider in {}{}'.format(
             datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
@@ -130,12 +130,12 @@ class IOSTypeSpider(object):
               '#define ios_device_des_h \n' \
               '{}\n' \
               '#endif /* ios_device_des_h */\n'.format(time_code, code)
-        with open('{}/{}'.format(current_dir, ios_device_des_h), 'w+', encoding='utf-8') as h:
+        with open('{}/{}'.format(current_dir, ios_device_des_h), 'w+') as h:
             h.write(des)
 
     @staticmethod
     def is_ios_des(des):
-        des_arr = ['AirPods', 'TV', 'Watch', 'HomePod', 'iPad', 'iPhone', 'iPod']
+        des_arr = ['AirPods', 'TV', 'Watch', 'HomePod', 'iPad', 'iPhone', 'iPod','Mac','iMac','MacBook','AirTag']
         for v in des_arr:
             if v in des:
                 return True
